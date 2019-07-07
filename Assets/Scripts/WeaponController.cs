@@ -33,7 +33,7 @@ public class WeaponController : MonoBehaviour
 
         if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out var hit, 10000f))
         {
-            var target = hit.collider.GetComponent<IShootingTarget>();
+            var target = hit.collider.GetComponent<IDamageable>();
             target?.TakeDamage(_damage);
 
             // To avoid making holes in the enemy

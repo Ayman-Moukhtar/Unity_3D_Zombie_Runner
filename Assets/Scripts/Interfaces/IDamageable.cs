@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.Interfaces
 {
-    public interface IShootingTarget
+    public interface IDamageable
     {
         void TakeDamage(float damage);
     }
