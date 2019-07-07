@@ -31,17 +31,22 @@ public class WeaponController : MonoBehaviour
 
         _muzzleFlash.gameObject.SetActive(true);
 
-        if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out var hit, 300f))
+        if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out var hit, 10000f))
         {
             var target = hit.collider.GetComponent<IShootingTarget>();
             target?.TakeDamage(_damage);
+
+            // To avoid making holes in the enemy
+            if (target != null) return;
+
             InstantiateHitImpact(hit);
         }
     }
 
     private void InstantiateHitImpact(RaycastHit hit)
     {
+        if (hit.point == null || hit.normal == null) return;
         var impact = Instantiate(_hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
-        Destroy(impact, .1f);
+        Destroy(impact, 5f);
     }
 }
