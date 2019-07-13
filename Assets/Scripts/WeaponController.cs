@@ -3,6 +3,11 @@ using Assets.Scripts.Interfaces;
 using System.Collections;
 using UnityEngine;
 
+public enum ShootingMode
+{
+    Rifle, Pistol
+}
+
 public class WeaponController : MonoBehaviour
 {
     private Camera _camera;
@@ -28,17 +33,24 @@ public class WeaponController : MonoBehaviour
     [SerializeField]
     private bool _hasScope = false;
 
+    [SerializeField]
+    private ShootingMode _shootingMode = ShootingMode.Rifle;
+
     private Animator _animator;
 
     private bool _isZoomedIn = false;
 
     private float _originalCameraFieldOfView;
 
+    private WeaponAmmo _ammo;
+
     void Start()
     {
         _camera = Camera.main;
-        _originalCameraFieldOfView = _camera.fieldOfView;
         _animator = GetComponent<Animator>();
+        _ammo = GetComponent<WeaponAmmo>();
+        _crosshairCanvas?.SetActive(true);
+        _originalCameraFieldOfView = _camera.fieldOfView;
     }
 
     void Update()
@@ -50,10 +62,24 @@ public class WeaponController : MonoBehaviour
             return;
         }
 
-        if (!Input.GetButton(Constant.Button.MainFire))
+        switch (_shootingMode)
         {
-            _muzzleFlash.SetActive(false);
-            return;
+            case ShootingMode.Rifle:
+                if (!Input.GetButton(Constant.Button.MainFire))
+                {
+                    _muzzleFlash.SetActive(false);
+                    return;
+                }
+                break;
+            case ShootingMode.Pistol:
+                if (!Input.GetButtonDown(Constant.Button.MainFire))
+                {
+                    _muzzleFlash.SetActive(false);
+                    return;
+                }
+                break;
+            default:
+                break;
         }
 
         Shoot();
@@ -61,6 +87,14 @@ public class WeaponController : MonoBehaviour
 
     private void Shoot()
     {
+        if (_ammo?.GetAmount() == 0)
+        {
+            _muzzleFlash.SetActive(false);
+            return;
+        }
+
+        _ammo?.Decrement();
+
         if (!_hasScope || (_hasScope && !_isZoomedIn))
         {
             _muzzleFlash.gameObject.SetActive(true);
@@ -91,11 +125,10 @@ public class WeaponController : MonoBehaviour
         GetComponent<MeshRenderer>().enabled = true;
     }
 
-    // Called on Scoped state start, animation event
-    private void OnScopedStateStart()
+    // Called on Zoomed state start, animation event
+    private void OnZoomedStateStart()
     {
         _crosshairCanvas?.SetActive(false);
-
         StartCoroutine(DoDelayedScopeWork());
     }
 

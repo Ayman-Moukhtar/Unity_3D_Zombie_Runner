@@ -23,6 +23,7 @@
         {
             public const string MainFire = "Fire1";
             public const string SecondaryFire = "Fire2";
+            public const string ScrollWheel = "Mouse ScrollWheel";
         }
 
         public class Event

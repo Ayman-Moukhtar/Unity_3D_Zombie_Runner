@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1124873522503301278}
   - component: {fileID: 1124873522504301150}
   - component: {fileID: 1124873522506588733}
+  - component: {fileID: 8974518851515055728}
   m_Layer: 0
   m_Name: AK-47
   m_TagString: Untagged
@@ -98,8 +99,22 @@ MonoBehaviour:
     type: 3}
   _crosshairCanvas: {fileID: 0}
   _scopeCanvas: {fileID: 0}
-  _scopedFieldOfView: 20
-  _nonScopedFieldOfView: 60
+  _zoomFieldOfViewMargin: 40
+  _hasScope: 0
+  _shootingMode: 0
+--- !u!114 &8974518851515055728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124873522506556574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf264ac45130809408f7d924c5f11b8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _amount: 60
 --- !u!1001 &1124873523039486154
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 2046128480136201550}
   - component: {fileID: 2046128480135235470}
   - component: {fileID: 2046128480144261262}
+  - component: {fileID: -4110742587260914441}
+  - component: {fileID: -1110905588720855586}
   m_Layer: 0
-  m_Name: WFX_Demo_M4
+  m_Name: M4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -95,6 +97,38 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!114 &-4110742587260914441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046128480137501006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11c5398b771bcde40962f285b85a5160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _damage: 30
+  _muzzleFlash: {fileID: 0}
+  _hitEffect: {fileID: 0}
+  _crosshairCanvas: {fileID: 0}
+  _scopeCanvas: {fileID: 0}
+  _zoomFieldOfViewMargin: 40
+  _hasScope: 0
+--- !u!114 &-1110905588720855586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2046128480137501006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf264ac45130809408f7d924c5f11b8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _amount: 40
 --- !u!1001 &9193184324410688586
 PrefabInstance:
   m_ObjectHideFlags: 0

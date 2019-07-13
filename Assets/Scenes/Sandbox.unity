@@ -3298,6 +3298,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2046128481276119661, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1695082842, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 3}
       propertyPath: _crosshairCanvas
       value: 
@@ -3315,8 +3320,46 @@ PrefabInstance:
       propertyPath: _crosshairCanvas
       value: 
       objectReference: {fileID: 586974440}
-    m_RemovedComponents: []
+    - target: {fileID: 5112629450866698196, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+        type: 3}
+      propertyPath: _muzzleFlash
+      value: 
+      objectReference: {fileID: 1822896943}
+    - target: {fileID: 5112629450866698196, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+        type: 3}
+      propertyPath: _hitEffect
+      value: 
+      objectReference: {fileID: 7142679828751772743, guid: 7c404d9f3ea5a9b489339a2d7942c651,
+        type: 3}
+    - target: {fileID: 5112629450866698196, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+        type: 3}
+      propertyPath: _crosshairCanvas
+      value: 
+      objectReference: {fileID: 586974440}
+    - target: {fileID: 5112629450866698196, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+        type: 3}
+      propertyPath: _scopeCanvas
+      value: 
+      objectReference: {fileID: 857107760}
+    - target: {fileID: 5112629450866698196, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+        type: 3}
+      propertyPath: _hasScope
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8112466449008559869, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+        type: 3}
+      propertyPath: _amount
+      value: 60
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1695082842, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 3}
+--- !u!1 &1822896943 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9193184323267973583, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+    type: 3}
+  m_PrefabInstance: {fileID: 1822896941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1842505289
 GameObject:
   m_ObjectHideFlags: 0
