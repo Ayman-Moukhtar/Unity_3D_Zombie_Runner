@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Interfaces;
+using System.Collections;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -14,15 +15,53 @@ public class WeaponController : MonoBehaviour
     [SerializeField]
     private GameObject _hitEffect;
 
+    [SerializeField]
+    private GameObject _crosshairCanvas;
+
+    [SerializeField]
+    private GameObject _scopeCanvas;
+
+    [SerializeField]
+    private Camera _fpsCamera;
+
+    [SerializeField]
+    private float _scopedFieldOfView = 20f;
+
+    [SerializeField]
+    private float _nonScopedFieldOfView = 60f;
+
+    private Animator _animator;
+
+    private bool _isScoped = false;
     // Start is called before the first frame update
     void Start()
     {
+        _crosshairCanvas.SetActive(true);
         _camera = FindObjectOfType<Camera>();
+        _animator = GetComponent<Animator>();
+    }
+
+    private IEnumerator Scope()
+    {
+        yield return new WaitForSeconds(.15f);
+        _scopeCanvas.SetActive(_isScoped);
+        _crosshairCanvas.SetActive(!_isScoped);
+        GetComponent<MeshRenderer>().enabled = !_isScoped;
+
+        _fpsCamera.fieldOfView = _isScoped ? _scopedFieldOfView : _nonScopedFieldOfView;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetButtonDown("Fire2"))
+        {
+            _isScoped = !_isScoped;
+            _animator.SetBool("IsScoped", _isScoped);
+            StartCoroutine(Scope());
+            return;
+        }
+
         if (!Input.GetButton("Fire1"))
         {
             _muzzleFlash.SetActive(false);
