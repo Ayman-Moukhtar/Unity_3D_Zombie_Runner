@@ -1,0 +1,23 @@
+﻿using Assets.Scripts.Interfaces;
+using UnityEngine;
+
+public class EnemyAttackController : MonoBehaviour
+{
+    private IDamageable _target;
+
+    [SerializeField]
+    private float _damage = 20f;
+
+    private void Start()
+    {
+        _target = FindObjectOfType<PlayerHealthController>();
+    }
+
+    // Called by string reference, Animation Event
+    private void OnAttack()
+    {
+        if (_target == null) return;
+
+        _target?.TakeDamage(_damage);
+    }
+}

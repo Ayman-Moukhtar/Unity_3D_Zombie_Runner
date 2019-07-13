@@ -13,5 +13,10 @@
             public const string Move = "Move";
             public const string Attack = "Attack";
         }
+
+        public class Event
+        {
+            public const string OnDamageTaken = "OnDamageTaken";
+        }
     }
 }
