@@ -106,9 +106,9 @@ public class WeaponController : MonoBehaviour
         if (_hasScope)
         {
             _scopeCanvas?.SetActive(true);
+            GetComponent<MeshRenderer>().enabled = false;
         }
         _camera.fieldOfView = _camera.fieldOfView - _zoomFieldOfViewMargin;
-        GetComponent<MeshRenderer>().enabled = false;
     }
 
     private void InstantiateHitImpact(RaycastHit hit)
