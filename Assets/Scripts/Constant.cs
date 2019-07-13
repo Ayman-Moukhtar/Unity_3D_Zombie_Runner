@@ -14,6 +14,17 @@
             public const string Attack = "Attack";
         }
 
+        public class WeaponStateParameter
+        {
+            public const string Zoomed = "IsZoomed";
+        }
+
+        public class Button
+        {
+            public const string MainFire = "Fire1";
+            public const string SecondaryFire = "Fire2";
+        }
+
         public class Event
         {
             public const string OnDamageTaken = "OnDamageTaken";

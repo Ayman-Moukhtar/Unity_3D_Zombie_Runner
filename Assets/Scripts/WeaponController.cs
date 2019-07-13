@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Interfaces;
+﻿using Assets.Scripts;
+using Assets.Scripts.Interfaces;
 using System.Collections;
 using UnityEngine;
 
@@ -22,64 +23,92 @@ public class WeaponController : MonoBehaviour
     private GameObject _scopeCanvas;
 
     [SerializeField]
-    private Camera _fpsCamera;
+    private float _zoomFieldOfViewMargin = 40f;
 
     [SerializeField]
-    private float _scopedFieldOfView = 20f;
-
-    [SerializeField]
-    private float _nonScopedFieldOfView = 60f;
+    private bool _hasScope = false;
 
     private Animator _animator;
 
-    private bool _isScoped = false;
-    // Start is called before the first frame update
+    private bool _isZoomedIn = false;
+
+    private float _originalCameraFieldOfView;
+
     void Start()
     {
-        _crosshairCanvas.SetActive(true);
-        _camera = FindObjectOfType<Camera>();
+        _camera = Camera.main;
+        _originalCameraFieldOfView = _camera.fieldOfView;
         _animator = GetComponent<Animator>();
     }
 
-    private IEnumerator Scope()
-    {
-        yield return new WaitForSeconds(.15f);
-        _scopeCanvas.SetActive(_isScoped);
-        _crosshairCanvas.SetActive(!_isScoped);
-        GetComponent<MeshRenderer>().enabled = !_isScoped;
-
-        _fpsCamera.fieldOfView = _isScoped ? _scopedFieldOfView : _nonScopedFieldOfView;
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Fire2"))
+        if (Input.GetButtonDown(Constant.Button.SecondaryFire))
         {
-            _isScoped = !_isScoped;
-            _animator.SetBool("IsScoped", _isScoped);
-            StartCoroutine(Scope());
+            _isZoomedIn = !_isZoomedIn;
+            _animator.SetBool(Constant.WeaponStateParameter.Zoomed, _isZoomedIn);
             return;
         }
 
-        if (!Input.GetButton("Fire1"))
+        if (!Input.GetButton(Constant.Button.MainFire))
         {
             _muzzleFlash.SetActive(false);
             return;
         }
 
-        _muzzleFlash.gameObject.SetActive(true);
+        Shoot();
+    }
+
+    private void Shoot()
+    {
+        if (!_hasScope || (_hasScope && !_isZoomedIn))
+        {
+            _muzzleFlash.gameObject.SetActive(true);
+        }
 
         if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out var hit, 10000f))
         {
-            var target = hit.collider.GetComponent<IDamageable>();
-            target?.TakeDamage(_damage);
+            var damageableTarget = hit.collider.GetComponent<IDamageable>();
+            damageableTarget?.TakeDamage(_damage);
 
             // To avoid making holes in the enemy
-            if (target != null) return;
+            if (damageableTarget != null) return;
 
             InstantiateHitImpact(hit);
         }
+    }
+
+    // Called on Idle state start, animation event
+    private void OnIdleStateStart()
+    {
+        if (_hasScope)
+        {
+            _scopeCanvas?.SetActive(false);
+        }
+        _crosshairCanvas?.SetActive(true);
+        _camera.fieldOfView = _originalCameraFieldOfView;
+
+        GetComponent<MeshRenderer>().enabled = true;
+    }
+
+    // Called on Scoped state start, animation event
+    private void OnScopedStateStart()
+    {
+        _crosshairCanvas?.SetActive(false);
+
+        StartCoroutine(DoDelayedScopeWork());
+    }
+
+    private IEnumerator DoDelayedScopeWork()
+    {
+        yield return new WaitForSeconds(.15f);
+
+        if (_hasScope)
+        {
+            _scopeCanvas?.SetActive(true);
+        }
+        _camera.fieldOfView = _camera.fieldOfView - _zoomFieldOfViewMargin;
+        GetComponent<MeshRenderer>().enabled = false;
     }
 
     private void InstantiateHitImpact(RaycastHit hit)
