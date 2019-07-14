@@ -116,6 +116,7 @@ MonoBehaviour:
   _scopeCanvas: {fileID: 0}
   _zoomFieldOfViewMargin: 40
   _hasScope: 0
+  _shootingMode: 0
 --- !u!114 &-1110905588720855586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,7 +129,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf264ac45130809408f7d924c5f11b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _amount: 40
+  _type: 0
+  _capacity: 120
 --- !u!1001 &9193184324410688586
 PrefabInstance:
   m_ObjectHideFlags: 0

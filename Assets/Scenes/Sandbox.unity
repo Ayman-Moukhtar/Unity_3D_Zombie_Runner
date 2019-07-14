@@ -3351,6 +3351,11 @@ PrefabInstance:
       propertyPath: _amount
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 4406229321421044613, guid: c6453f8e1f814744d8b94e5a6d1f9942,
+        type: 3}
+      propertyPath: _ammoSlots.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1695082842, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c6453f8e1f814744d8b94e5a6d1f9942, type: 3}

@@ -13,7 +13,7 @@ public class EnemyHealth : MonoBehaviour, IDamageable
 
         if (_health <= 0)
         {
-            Destroy(gameObject);
+            BroadcastMessage(Constant.Event.OnEnemyHealthDepleted);
             return;
         }
 

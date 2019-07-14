@@ -183,6 +183,8 @@ GameObject:
   - component: {fileID: 1395312238565631296}
   - component: {fileID: 701731656892082529}
   - component: {fileID: 3907052038125365930}
+  - component: {fileID: 4406229321421044613}
+  - component: {fileID: 4294923696153291071}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -340,6 +342,37 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1100ad176dc78c84ab760451bbe74a16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4406229321421044613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc258a08dc1dd64b90a9408a6f092f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ammoSlots:
+  - _type: 0
+    _capacity: 500
+  - _type: 1
+    _capacity: 50
+  - _type: 2
+    _capacity: 35
+--- !u!114 &4294923696153291071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 091350f2c53a15241a34bf49e9492b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1505683802
@@ -542,11 +575,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1505683803}
     m_Modifications:
-    - target: {fileID: 1124873522506556574, guid: e36cc4f80d72a16468f28671d1600670,
-        type: 3}
-      propertyPath: m_Name
-      value: AK-47
-      objectReference: {fileID: 0}
     - target: {fileID: 1124873522506201278, guid: e36cc4f80d72a16468f28671d1600670,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -631,6 +659,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.30282503
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124873522506556574, guid: e36cc4f80d72a16468f28671d1600670,
+        type: 3}
+      propertyPath: m_Name
+      value: AK-47
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e36cc4f80d72a16468f28671d1600670, type: 3}

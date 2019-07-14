@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(WeaponController))]
 public class WeaponSwitcher : MonoBehaviour
 {
     private List<WeaponController> _weapons;
@@ -57,8 +58,6 @@ public class WeaponSwitcher : MonoBehaviour
 
     private void SetActiveWeapon(int num)
     {
-        Debug.Log("Ha Set Abl " + num);
-
         if (num > _weapons.Count)
         {
             num = 1;
@@ -73,13 +72,19 @@ public class WeaponSwitcher : MonoBehaviour
         _currentActiveWeapon = num;
         for (int i = 0; i < _weapons.Count; i++)
         {
-            if (i == weaponIndex)
+            var weapon = _weapons[i];
+            if (i == weaponIndex && !weapon.gameObject.activeSelf)
             {
-                _weapons[i].gameObject.SetActive(true);
+                weapon.gameObject.SetActive(true);
                 continue;
             }
 
-            _weapons[i].gameObject.SetActive(false);
+            if (i != weaponIndex && weapon.gameObject.activeSelf)
+            {
+                weapon.gameObject.SetActive(false);
+            }
         }
     }
+
+    public WeaponController GetActiveWeapon() => _weapons.SingleOrDefault(_ => _.gameObject.activeSelf);
 }

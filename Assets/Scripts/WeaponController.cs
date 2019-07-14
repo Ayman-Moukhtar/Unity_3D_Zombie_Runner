@@ -87,7 +87,7 @@ public class WeaponController : MonoBehaviour
 
     private void Shoot()
     {
-        if (_ammo?.GetAmount() == 0)
+        if (_ammo?.GetRemainingBullets() == 0)
         {
             _muzzleFlash.SetActive(false);
             return;
@@ -150,4 +150,21 @@ public class WeaponController : MonoBehaviour
         var impact = Instantiate(_hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(impact, 5f);
     }
+
+    // Called by unity when object is set Inactive
+    private void OnDisable()
+    {
+        if (_isZoomedIn)
+        {
+            _isZoomedIn = false;
+            _animator.SetBool(Constant.WeaponStateParameter.Zoomed, _isZoomedIn);
+
+            if (_hasScope)
+            {
+                _scopeCanvas?.SetActive(false);
+                _camera.fieldOfView = _originalCameraFieldOfView;
+            }
+        }
+    }
+
 }

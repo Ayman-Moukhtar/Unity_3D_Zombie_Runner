@@ -14,6 +14,7 @@ public class EnemyMovementController : MonoBehaviour
     private float _rotationSpeed = 5f;
 
     private bool _isProvoked = false;
+    private bool _isDead = false;
     private bool ShouldAttackTarget => CanSeeTarget || _isProvoked;
     private bool CanSeeTarget => Vector3.Distance(transform.position, _target.position) <= _chaseRange;
     private bool InAttackRange => Vector3.Distance(transform.position, _target.position) <= _navMeshAgent.stoppingDistance;
@@ -29,6 +30,11 @@ public class EnemyMovementController : MonoBehaviour
 
     private void Update()
     {
+        if (_isDead)
+        {
+            return;
+        }
+
         if (!ShouldAttackTarget)
         {
             SetEnemyState(EnemyState.Idle);
@@ -89,7 +95,18 @@ public class EnemyMovementController : MonoBehaviour
                     _animator.ResetTrigger(EnemyStateId.Move);
                 }
                 break;
+            case EnemyState.Dead:
+                _animator.SetTrigger(EnemyStateId.Dead);
+                break;
         }
+    }
+
+    private void Die()
+    {
+        _navMeshAgent.isStopped = true;
+        _isDead = true;
+        SetEnemyState(EnemyState.Dead);
+        Destroy(gameObject, 20f);
     }
 
     private void OnDrawGizmosSelected()
@@ -102,6 +119,13 @@ public class EnemyMovementController : MonoBehaviour
     private void OnDamageTaken()
     {
         _isProvoked = true;
+    }
+
+    private void OnEnemyHealthDepleted()
+    {
+        if (_isDead) return;
+
+        Die();
     }
 }
 
