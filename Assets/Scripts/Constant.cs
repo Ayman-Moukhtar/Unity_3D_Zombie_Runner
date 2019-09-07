@@ -37,5 +37,10 @@
             public const string OnDamageTaken = "OnDamageTaken";
             public const string OnEnemyHealthDepleted = "OnEnemyHealthDepleted";
         }
+
+        public class Tag
+        {
+            public const string Player = "Player";
+        }
     }
 }
