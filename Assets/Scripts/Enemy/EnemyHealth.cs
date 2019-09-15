@@ -1,8 +1,7 @@
 ﻿using Assets.Scripts;
-using Assets.Scripts.Interfaces;
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour, IDamageable
+public class EnemyHealth : MonoBehaviour
 {
     [SerializeField]
     private float _health = 600f;

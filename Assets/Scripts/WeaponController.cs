@@ -1,5 +1,4 @@
 ﻿using Assets.Scripts;
-using Assets.Scripts.Interfaces;
 using System.Collections;
 using UnityEngine;
 
@@ -102,7 +101,7 @@ public class WeaponController : MonoBehaviour
 
         if (Physics.Raycast(_camera.transform.position, _camera.transform.forward, out var hit, 10000f))
         {
-            var damageableTarget = hit.collider.GetComponent<IDamageable>();
+            var damageableTarget = hit.collider.GetComponent<EnemyHealth>();
             damageableTarget?.TakeDamage(_damage);
 
             // To avoid making holes in the enemy

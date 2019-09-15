@@ -4,7 +4,6 @@ using static Assets.Scripts.Constant;
 
 public class EnemyMovementController : MonoBehaviour
 {
-    [SerializeField]
     private Transform _target;
 
     [SerializeField]
@@ -26,6 +25,7 @@ public class EnemyMovementController : MonoBehaviour
     {
         _navMeshAgent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
+        _target = FindObjectOfType<PlayerHealthController>().transform;
     }
 
     private void Update()

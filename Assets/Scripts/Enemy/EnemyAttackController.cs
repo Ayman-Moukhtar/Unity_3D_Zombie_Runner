@@ -1,9 +1,8 @@
-﻿using Assets.Scripts.Interfaces;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemyAttackController : MonoBehaviour
 {
-    private IDamageable _target;
+    private PlayerHealthController _target;
 
     [SerializeField]
     private float _damage = 20f;
