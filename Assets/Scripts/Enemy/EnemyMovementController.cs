@@ -105,6 +105,7 @@ public class EnemyMovementController : MonoBehaviour
     {
         _navMeshAgent.isStopped = true;
         _isDead = true;
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
         SetEnemyState(EnemyState.Dead);
         Destroy(gameObject, 20f);
     }
